@@ -1,0 +1,478 @@
+/* Общие стили для сайта */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+}
+
+header {
+    background-color: #1f1f1f;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    border-bottom: 2px solid #333;
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.logo a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 15px;
+    font-size: 16px; /* Размер текста */
+    font-weight: bold; /* Жирный текст */
+    justify-content: center; /* Центрируем текст по горизонтали */
+    align-items: center; /* Центрируем текст по вертикали */
+    transition: background-color 300ms ease, color 300ms ease;
+}
+
+.auth-buttons a {
+    display: inline-flex; /* Добавляем flex для центрирования содержимого */
+    color: #ffffff;
+    background-color: #333;
+    border: none;
+    border-radius: 25px;
+    padding: 0.75rem;
+    text-decoration: none;
+    width: 100px;
+    font-size: 16px; /* Размер текста */
+    font-weight: bold; /* Жирный текст */
+    justify-content: center; /* Центрируем текст по горизонтали */
+    align-items: center; /* Центрируем текст по вертикали */
+    transition: background-color 300ms ease, color 300ms ease;
+}
+
+.auth-buttons a:hover {
+    background-color: #555;
+    font-size: 16px; /* Размер текста */
+    font-weight: bold; /* Жирный текст */
+    justify-content: center; /* Центрируем текст по горизонтали */
+    align-items: center; /* Центрируем текст по вертикали */
+    transition: background-color 300ms ease, color 300ms ease;
+}
+
+/* Стили для формы авторизации */
+.auth-container {
+    background-color: #1f1f1f;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+    width: 100%;
+    margin: 100px auto; /* Центрирование контейнера */
+}
+
+.auth-container h2 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #ffffff;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    display: block;
+    color: #ffffff;
+}
+
+.form-control {
+    width: 100%;
+    height: 45px;
+    background-color: #333;
+    color: #ffffff;
+    border: 1px solid #555;
+    border-radius: 25px;
+}
+
+.form-control:focus {
+    background-color: #444;
+    color: #ffffff;
+    border-color: #777;
+    outline: none;
+}
+
+.alert {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: #333;
+    color: #ffffff;
+    border: 1px solid #555;
+    border-radius: 4px;
+}
+
+.toggle-link {
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    color: #ffffff;
+}
+
+.toggle-link:hover {
+    color: #cccccc;
+}
+
+.info-block {
+    padding: 50px;
+    text-align: center;
+}
+
+.info-block h1 {
+    font-size: 48px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.info-block p {
+    font-size: 20px;
+    color: #cccccc;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Контейнер для формы */
+.auth-container {
+    background-color: #1f1f1f;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+    margin: 50px auto;
+    color: #fff;
+}
+
+/* Поле ввода пароля */
+.form-group.position-relative {
+    position: relative;
+}
+
+/* Кнопка для отображения пароля */
+.btn-eye {
+    position: absolute;
+    right: 10px; /* Расположить кнопку справа */
+    top: 25px;   /* Закрепляем кнопку к верхнему краю */
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    color: #ccc;
+    cursor: pointer;
+    height: 45px;
+    align-items: center; /* Центрируем текст по вертикали */
+}
+
+.btn-eye:hover {
+    color: #6a6a6a;
+}
+
+/* Поля ввода */
+.form-control {
+    background-color: #333;
+    border: 1px solid #555;
+    color: #fff;
+    padding: 1rem;
+    padding-right: 40px; /* Оставляем место для кнопки "Показать пароль" */
+}
+
+/* Поле ввода с фокусом */
+.form-control:focus {
+    background-color: #444;
+    border-color: #777;
+    color: #fff;
+    outline: none;
+}
+
+/* Сообщение об ошибке */
+.form-text {
+    color: red;
+    margin-top: 0.5rem;
+}
+
+/* Кнопка подтверждения */
+.btn-primary {
+    background-color: #333;
+    border: none;
+    border-radius: 25px;
+    color: #ffffff;
+    padding: 0.75rem;
+    width: 100%;
+    margin-top: 1rem;
+    font-size: 16px; /* Размер текста */
+    justify-content: center; /* Центрируем текст по горизонтали */
+    align-items: center; /* Центрируем текст по вертикали */
+    transition: background-color 300ms ease, color 300ms ease;
+}
+
+.btn-primary:hover {
+    background-color: #555;
+}
+
+.text-muted {
+    --bs-text-opacity: 1;
+    color: rgb(255 0 0 / 75%) !important;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none; /* Убираем подчеркивание */
+    font-weight: bold; /* Делаем текст жирным */
+    transition: color 0.3s ease; /* Плавное изменение цвета */
+}
+
+/* Основные стили для страницы профиля */
+.profile-page {
+    text-align: center;
+    color: #ffffff;
+    padding: 2rem;
+}
+
+h3 {
+    margin-top: 2rem;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Основные стили для страницы профиля */
+.profile-page {
+    text-align: center;
+    color: #ffffff;
+    padding: 2rem;
+}
+
+h3 {
+    margin-top: 2rem;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Сетка для треков с фиксированным отступом */
+.track-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));  /* Фиксированная ширина плиток с авто-заполнением */
+    gap: 15px 15px; /* Вертикальные и горизонтальные отступы между плитками */
+    justify-content: center; /* Центрируем плитки по горизонтали */
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    width: fit-content; /* Ширина по контенту */
+    margin-left: auto; /* Авто выравнивание влево */
+    margin-right: auto; /* Авто выравнивание вправо */
+}
+
+/* Карточка трека с фиксированной шириной */
+.track-item {
+    width: 150px;  /* Фиксированная ширина */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #1f1f1f;
+    padding: 1rem;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.track-item:hover {
+    transform: scale(1.05);
+}
+
+/* Обложка трека */
+.track-cover {
+    width: 100px;
+    height: 100px;
+    border-radius: 3px;
+    margin-bottom: 1rem;
+}
+
+/* Название трека */
+.track-name {
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+}
+
+.track-name:hover {
+    color: #1db954;  /* Цвет бренда Spotify */
+}
+
+/* Имя исполнителя, всегда на новой строке */
+.artist-name {
+    font-size: 12px;
+    color: #cccccc;
+    text-decoration: none;
+    display: block;  /* Убедимся, что всегда на новой строке */
+    margin-top: 0.5rem;
+}
+
+.artist-name:hover {
+    color: #999999;
+}
+
+/* Медиазапросы для адаптивности */
+
+/* Максимум 5 треков в ряд на больших экранах */
+@media (min-width: 900px) {
+    .track-list {
+        grid-template-columns: repeat(5, 1fr);  /* До 5 колонок на больших экранах */
+    }
+}
+
+/* 2 трека в ряд на мобильных устройствах */
+@media (max-width: 900px) {
+    .track-list {
+        grid-template-columns: repeat(2, 1fr);  /* 2 колонки на мобильных устройствах */
+    }
+}
+
+.btn.disabled, .btn:disabled, fieldset:disabled .btn {
+    margin-top: 0px !important;
+    width: 350px;
+    background-color: #333;
+}
+
+.mt-4 {
+    width: 350px;
+}
+
+.marg {
+    margin-bottom: 30px;
+}
+
+/* Стили для ползунков */
+input[type="range"] {
+    -webkit-appearance: none; /* Убираем стандартный стиль */
+    width: 100%;
+    height: 8px;
+    background: #333; /* Синий цвет полоски, как у кнопки */
+    border-radius: 5px;
+    outline: none;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Убираем стандартный стиль */
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #1ed760; /* Чёрный цвет указателя */
+    cursor: pointer;
+}
+
+
+input[type="range"]:hover {
+    opacity: 1; /* Изменяем прозрачность при наведении */
+}
+
+.progress{
+  position: absolute;
+  content:'';
+  width: 50%;
+  height: 3px;
+  background-color: #1ed760;
+  top: calc(50% + 1.5px);
+  z-index: 1;
+}
+
+.slider {
+    -webkit-appearance: none; /* Убираем стандартный стиль */
+    width: 100%;
+    height: 8px;
+    background: #333; /* Синий цвет полоски, как у кнопки */
+    border-radius: 5px;
+    outline: none;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+}
+
+::placeholder {
+    color: #ffffff; /* Светло-серый цвет */
+    opacity: 1; /* Полностью видим */
+}
+
+label span {
+    margin-left: 10px;
+    font-weight: bold;
+    color: #1ed760; /* Синий цвет */
+}
+
+/* Чекбоксы как кнопки */
+input[type="checkbox"]:checked {
+    background-color: #1ed760; /* Синий цвет для активного состояния */
+}
+
+/* Круглые чекбоксы */
+input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #464646;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 300ms ease, transform 300ms ease;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #1ed760;
+    transform: scale(1.2);
+}
+
+.form-label {
+    margin-bottom: 0.5rem;
+}
+
+.down {
+    margin-bottom: 60px;
+}
+
+.btn-primary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #1b9348;
+    --bs-btn-border-color: #1b9348;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #1b9348;
+    --bs-btn-hover-border-color: #1b9348;
+    --bs-btn-focus-shadow-rgb: 49, 132, 253;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #1b9348;
+    --bs-btn-active-border-color: #1b9348;
+    --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #1b9348;
+    --bs-btn-disabled-border-color: #1b9348;
+}
+
+.spotic {
+    background-color: #1ed760;
+    color: black;
+}
+
+.center1 {
+    text-align: center;
+}

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <a href="{{ url_for('home') }}">LOGO</a>
+    </div>
+    <div class="auth-buttons">
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('auth.logout') }}">Logout</a>
+        {% else %}
+            <a href="{{ url_for('auth.login') }}">Login</a>
+            <a href="{{ url_for('auth.register') }}">Register</a>
+        {% endif %}
+    </div>
+</header>
+
+<div class="auth-container">
+    <h2>{{ title }}</h2>
+    <form method="POST" id="authForm">
+        {% if title == "Register" %}
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+            <small id="usernameHelp" class="form-text text-muted"></small>
+        </div>
+        {% endif %}
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+            <small id="emailHelp" class="form-text text-muted"></small>
+        </div>
+        <div class="form-group position-relative">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+            <button type="button" class="btn btn-eye" onclick="togglePassword('password')">&#128065;</button>
+            <small id="passwordHelp" class="form-text text-muted"></small>
+        </div>
+        {% if title == "Register" %}
+        <div class="form-group position-relative">
+            <label for="confirm_password">Confirm Password:</label>
+            <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+            <button type="button" class="btn btn-eye" onclick="togglePassword('confirm_password')">&#128065;</button>
+            <small id="confirmPasswordHelp" class="form-text text-muted"></small>
+        </div>
+        {% endif %}
+        <button type="submit" class="btn btn-primary">{{ button_text }}</button>
+    </form>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="alert">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+    <a href="{{ toggle_url }}" class="toggle-link">{{ toggle_text }}</a>
+</div>
+
+<script>
+    // Функция для переключения видимости пароля
+    function togglePassword(fieldId) {
+        const passwordField = document.getElementById(fieldId);
+        const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordField.setAttribute('type', type);
+    }
+
+    // Клиентская валидация в реальном времени и при отправке формы
+    document.getElementById('authForm').addEventListener('input', function(event) {
+        const field = event.target;
+        if (field.id === 'username') {
+            validateUsername(field);
+        } else if (field.id === 'email') {
+            validateEmail(field);
+        } else if (field.id === 'password') {
+            validatePassword(field);
+        } else if (field.id === 'confirm_password') {
+            validateConfirmPassword(field);
+        }
+    });
+
+    // Функция для валидации при отправке формы
+    document.getElementById('authForm').addEventListener('submit', function(event) {
+        let isValid = true;
+
+        const usernameField = document.getElementById('username');
+        const emailField = document.getElementById('email');
+        const passwordField = document.getElementById('password');
+        const confirmPasswordField = document.getElementById('confirm_password');
+
+        if (usernameField) {
+            if (!validateUsername(usernameField)) isValid = false;
+        }
+        if (!validateEmail(emailField)) isValid = false;
+        if (!validatePassword(passwordField)) isValid = false;
+        if (confirmPasswordField && !validateConfirmPassword(confirmPasswordField)) isValid = false;
+
+        // Если хотя бы одно поле невалидно, отменяем отправку формы
+        if (!isValid) {
+            event.preventDefault();
+            alert("Please fix the errors in the form before submitting.");
+        }
+    });
+
+    function validateUsername(field) {
+        const usernameHelp = document.getElementById('usernameHelp');
+        if (field.value.length < 3) {
+            usernameHelp.textContent = "Username must be at least 3 characters long";
+            usernameHelp.style.color = "red";
+            return false;
+        } else {
+            usernameHelp.textContent = "";
+            return true;
+        }
+    }
+
+    function validateEmail(field) {
+        const emailHelp = document.getElementById('emailHelp');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(field.value)) {
+            emailHelp.textContent = "Invalid email format";
+            emailHelp.style.color = "red";
+            return false;
+        } else {
+            emailHelp.textContent = "";
+            return true;
+        }
+    }
+
+    function validatePassword(field) {
+        const passwordHelp = document.getElementById('passwordHelp');
+        const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
+        if (!passwordRegex.test(field.value)) {
+            passwordHelp.textContent = "Password must be at least 8 characters long and include an uppercase letter, a lowercase letter, a number, and a special character.";
+            passwordHelp.style.color = "red";
+            return false;
+        } else {
+            passwordHelp.textContent = "";
+            return true;
+        }
+    }
+
+    function validateConfirmPassword(field) {
+        const confirmPasswordHelp = document.getElementById('confirmPasswordHelp');
+        const passwordField = document.getElementById('password');
+        if (field.value !== passwordField.value) {
+            confirmPasswordHelp.textContent = "Passwords do not match";
+            confirmPasswordHelp.style.color = "red";
+            return false;
+        } else {
+            confirmPasswordHelp.textContent = "";
+            return true;
+        }
+    }
+</script>
+</body>
+</html>

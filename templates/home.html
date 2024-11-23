@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <a href="{{ url_for('home') }}">LOGO</a>
+    </div>
+    <div class="auth-buttons">
+        <a href="{{ url_for('profile') }}">Profile</a>
+    </div>
+</header>
+
+<div class="info-block">
+    <h1>About Our Service</h1>
+    <p>
+        Welcome to our music recommendation service! With the help of advanced AI algorithms and integration with Spotify, we offer you personalized music recommendations based on your listening preferences.
+        Whether you want to discover new artists, explore different genres, or fine-tune your playlist with specific musical attributes like tempo, energy, or danceability, our service provides a highly customized experience.
+    </p>
+
+    <h2>Key Features</h2>
+    <ul>
+        <li><strong>Spotify Integration:</strong> Connect your Spotify account to get personalized recommendations based on your listening habits.</li>
+        <li><strong>Customizable Filters:</strong> Use our sliders to control various parameters like loudness, tempo, and energy to refine your recommendations.</li>
+        <li><strong>Playlist Creation:</strong> Easily create and manage playlists directly from our platform, and add recommended tracks to your Spotify account.</li>
+        <li><strong>Music Discovery:</strong> Discover similar tracks and artists based on your favorite music, with endless possibilities for exploring new tunes.</li>
+    </ul>
+
+    <h2>How It Works</h2>
+    <p>
+        1. Sign up or log in with your Spotify account.<br>
+        2. Explore your personalized recommendations, or use our advanced filters to fine-tune the type of music you want to discover.<br>
+        3. Add your favorite tracks to your playlist or create a new one, all seamlessly integrated with your Spotify account.<br>
+    </p>
+    
+</div>
+
+</body>
+</html>

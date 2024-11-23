@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customize Recommendations</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<header>
+    <div class="logo">
+        <a href="{{ url_for('home') }}">LOGO</a>
+    </div>
+    <div class="auth-buttons">
+        <a href="/profile">Profile</a>
+    </div>
+</header>
+
+<body>
+    <div class="container mt-5">
+        <h1>Customize Your Track Recommendations</h1>
+        <form method="POST">
+            <!-- Поля для ввода ссылок на трек и исполнителя -->
+            <div class="mb-3">
+                <label for="track_link" class="form-label">Spotify Track Link</label>
+                <input type="url" class="form-control" id="track_link" name="track_link" placeholder="https://open.spotify.com/track/..." required>
+            </div>
+            <div class="mb-3">
+                <label for="artist_link" class="form-label">Spotify Artist Link (optional)</label>
+                <input type="url" class="form-control" id="artist_link" name="artist_link" placeholder="https://open.spotify.com/artist/...">
+            </div>
+
+                                        <!-- Кнопки для включения/выключения всех чекбоксов -->
+        <div class="mb-3">
+            <button type="button" class="btn btn-primary" id="disableCheckboxes">Disable All</button>
+            <button type="button" class="btn btn-primary" id="enableCheckboxes">Enable All</button>
+        </div>
+
+
+            <!-- Чекбоксы и ползунки -->
+            <div class="mb-3">
+                <input type="checkbox" id="use_acousticness" name="use_acousticness">
+                <label for="acousticness" class="form-label">Acousticness <span id="acousticnessValue">0.5</span></label>
+                <input type="range" class="slider" min="0" max="1" step="0.1" id="acousticness" name="acousticness" value="0.5" oninput="updateValue('acousticness', 'acousticnessValue')">
+            </div>
+            <div class="mb-3">
+                <input type="checkbox" id="use_danceability" name="use_danceability">
+                <label for="danceability" class="form-label">Danceability <span id="danceabilityValue">0.5</span></label>
+                <input type="range" class="slider" min="0" max="1" step="0.1" id="danceability" name="danceability" value="0.5" oninput="updateValue('danceability', 'danceabilityValue')">
+            </div>
+            <div class="mb-3">
+                <input type="checkbox" id="use_energy" name="use_energy">
+                <label for="energy" class="form-label">Energy <span id="energyValue">0.5</span></label>
+                <input type="range" class="slider" min="0" max="1" step="0.1" id="energy" name="energy" value="0.5" oninput="updateValue('energy', 'energyValue')">
+            </div>
+            <div class="mb-3">
+                <input type="checkbox" id="use_instrumentalness" name="use_instrumentalness">
+                <label for="instrumentalness" class="form-label">Instrumentalness <span id="instrumentalnessValue">0.5</span></label>
+                <input type="range" class="slider" min="0" max="1" step="0.1" id="instrumentalness" name="instrumentalness" value="0.5" oninput="updateValue('instrumentalness', 'instrumentalnessValue')">
+            </div>
+            <div class="mb-3">
+                <input type="checkbox" id="use_liveness" name="use_liveness">
+                <label for="liveness" class="form-label">Liveness <span id="livenessValue">0.5</span></label>
+                <input type="range" class="slider" min="0" max="1" step="0.1" id="liveness" name="liveness" value="0.5" oninput="updateValue('liveness', 'livenessValue')">
+            </div>
+            <div class="mb-3">
+                <input type="checkbox" id="use_loudness" name="use_loudness">
+                <label for="loudness" class="form-label">Loudness (dB) <span id="loudnessValue">-20</span></label>
+                <input type="range" class="slider" min="-60" max="0" step="1" id="loudness" name="loudness" value="-20" oninput="updateValue('loudness', 'loudnessValue')">
+            </div>
+            <div class="mb-3">
+                <input type="checkbox" id="use_popularity" name="use_popularity">
+                <label for="popularity" class="form-label">Popularity <span id="popularityValue">50</span></label>
+                <input type="range" class="slider" min="0" max="100" step="1" id="popularity" name="popularity" value="50" oninput="updateValue('popularity', 'popularityValue')">
+            </div>
+            <div class="mb-3">
+                <input type="checkbox" id="use_speechiness" name="use_speechiness">
+                <label for="speechiness" class="form-label">Speechiness <span id="speechinessValue">0.5</span></label>
+                <input type="range" class="slider" min="0" max="1" step="0.1" id="speechiness" name="speechiness" value="0.5" oninput="updateValue('speechiness', 'speechinessValue')">
+            </div>
+            <div class="mb-3">
+                <input type="checkbox" id="use_tempo" name="use_tempo">
+                <label for="tempo" class="form-label">Tempo (BPM) <span id="tempoValue">120</span></label>
+                <input type="range" class="slider" min="50" max="200" step="5" id="tempo" name="tempo" value="120" oninput="updateValue('tempo', 'tempoValue')">
+            </div>
+            <div class="mb-3">
+                <input type="checkbox" id="use_valence" name="use_valence">
+                <label for="valence" class="form-label">Valence <span id="valenceValue">0.5</span></label>
+                <input type="range" class="slider" min="0" max="1" step="0.1" id="valence" name="valence" value="0.5" oninput="updateValue('valence', 'valenceValue')">
+            </div>
+
+            <!-- Кнопка для отправки настроек -->
+            <button type="submit" class="btn btn-primary mt-3">Get Recommendations</button>
+        </form>
+
+        <div class="mt-5 down">
+            <h3>Explanation of Parameters</h3>
+            <p><strong>Acousticness</strong></p><p>A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents high confidence the track is acoustic.</p>
+            <p><strong>Danceability</strong></p><p>Describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.</p>
+            <p><strong>Energy</strong></p><p>A measure from 0.0 to 1.0 that represents a perceptual measure of intensity and activity. Energetic tracks feel fast, loud, and noisy. Death metal has high energy, while a Bach prelude has low energy.</p>
+            <p><strong>Instrumentalness</strong></p><p>Predicts whether a track contains no vocals. A higher value means it's more likely to be instrumental.</p>
+            <p><strong>Liveness</strong> </p><p>Detects the presence of an audience in the recording. A value above 0.8 provides strong likelihood that the track is live.</p>
+            <p><strong>Loudness</strong> </p><p>The overall loudness of a track in decibels (dB). Values typically range between -60 and 0 dB.</p>
+            <p><strong>Speechiness</strong> </p><p>Detects the presence of spoken words in a track. Values above 0.66 describe tracks that are mostly spoken words.</p>
+            <p><strong>Tempo</strong> </p><p>The overall estimated tempo of a track in beats per minute (BPM).</p>
+            <p><strong>Valence</strong> </p><p>A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive.</p>
+        </div>
+
+        <script>
+            function updateValue(sliderId, valueId) {
+                var slider = document.getElementById(sliderId);
+                var valueLabel = document.getElementById(valueId);
+                valueLabel.textContent = slider.value;
+            }
+
+                   // Функция для включения всех чекбоксов
+        document.getElementById('enableCheckboxes').onclick = function() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = true;
+            });
+        };
+
+        // Функция для отключения всех чекбоксов
+        document.getElementById('disableCheckboxes').onclick = function() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = false;
+            });
+        };
+
+        </script>
+
+    </div>
+</body>
+</html>
