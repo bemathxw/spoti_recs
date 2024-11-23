@@ -1,4 +1,3 @@
-import MySQLdb
 from flask import Flask, render_template, g, redirect, url_for, session, flash
 from spotify import spotify_bp
 from models.user import User
