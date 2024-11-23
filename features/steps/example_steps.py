@@ -14,34 +14,63 @@ def step_submit_recommendations(context, track_link, energy):
 
         mock_get_headers.return_value = {'Authorization': 'Bearer valid_token'}
 
-        # Mock response for the track
+        # Mock ответа для трека
         track_mock_response = MagicMock()
         track_mock_response.status_code = 200
-        track_mock_response.json.return_value = {
-            "artists": [{"id": "mock_artist_id", "name": "Mock Artist"}]
-        }
 
-        # Mock response for recommendations
+        # Здесь мы используем параметры из таблицы Examples
+        if 'mocktrack' in track_link:
+            track_mock_response.json.return_value = {
+                "artists": [{"id": "mock_artist_id", "name": "Mock Artist"}]
+            }
+        elif 'anothermock' in track_link:
+            track_mock_response.json.return_value = {
+                "artists": [{"id": "another_mock_artist_id", "name": "Another Artist"}]
+            }
+        else:
+            track_mock_response.json.return_value = {
+                "artists": [{"id": "default_artist_id", "name": "Default Artist"}]
+            }
+
+        # Mock ответа для рекомендаций
         recommendations_mock_response = MagicMock()
         recommendations_mock_response.status_code = 200
-        recommendations_mock_response.json.return_value = {
-            "tracks": [
-                {
-                    "album": {
-                        "images": [{"url": "https://i.scdn.co/image/mock_album_image.jpg"}],
-                        "name": "Mock Album"
-                    },
-                    "artists": [{"id": "mock_artist_id", "name": "Mock Artist"}],
-                    "id": "mock_track_id",
-                    "name": "Mock Track 1"
-                }
-            ]
-        }
 
-        # Set side effects for the mocks
+        if energy == '0.8':
+            recommendations_mock_response.json.return_value = {
+                "tracks": [
+                    {
+                        "album": {
+                            "images": [{"url": "https://i.scdn.co/image/mock_album_image.jpg"}],
+                            "name": "Mock Album"
+                        },
+                        "artists": [{"id": "mock_artist_id", "name": "Mock Artist"}],
+                        "id": "mock_track_id",
+                        "name": "Mock Track 1"
+                    }
+                ]
+            }
+        elif energy == '0.5':
+            recommendations_mock_response.json.return_value = {
+                "tracks": [
+                    {
+                        "album": {
+                            "images": [{"url": "https://i.scdn.co/image/another_mock_album_image.jpg"}],
+                            "name": "Another Album"
+                        },
+                        "artists": [{"id": "another_mock_artist_id", "name": "Another Artist"}],
+                        "id": "another_mock_track_id",
+                        "name": "Another Mock Track"
+                    }
+                ]
+            }
+        else:
+            recommendations_mock_response.json.return_value = {"tracks": []}
+
+        # Настраиваем последовательность моков
         mock_requests_get.side_effect = [track_mock_response, recommendations_mock_response]
 
-        # Send POST request
+        # Отправляем POST-запрос
         context.response = context.client.post('/recommendations/customize-recommendations', data={
             'track_link': track_link,
             'use_energy': 'on',
